@@ -5,6 +5,46 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    user-select: none;
+    transition: all 500ms;
+}
+.backText {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+.backText>h1 {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    color: black;
+    font-size: 20vmin;
+}
+.backText>h1:nth-of-type(2) {
+    top: 30%;
+}
+.backText>h1:nth-of-type(3) {
+    color: navy;
+    right: 0;
+    bottom: 0;
+}
+.wiredHolder {
+    position: absolute;
+    right: 3vmin;
+    z-index: 75;
+    cursor: pointer;
+    transition: all 300ms;
+    font-size: 6vmin;
+    font-weight: 600;
+    transform: scale(1.5, 1);
+    background: linear-gradient(to top, yellow 50%, black 50%);
+    background-size: 100% 200%;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.wiredHolder:hover {
+    background-position: bottom;
 }
 .sliders {
     position: absolute;
@@ -12,40 +52,59 @@
     top: 25%;
     z-index: 100;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     width: 25vw;
+    transition: color 500ms;
 }
 .sliders>div {
-    display: inline;
     text-align: center;
 }
 .audioStuffs {
     position: absolute;
-    border-radius: 5px;
+    z-index: 75;
     width: 25vw;
-    height: 25vh;
+    height: 35vh;
     left: 0;
-    top: 25%;
-    background: white;
+    bottom: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: end;
     padding-left: 2vw;
     opacity: 1;
     pointer-events: all;
     transform: scale(1,1);
-    transition: all 300ms;
+    transition: all 500ms;
 }
 .hidestuffs {
     opacity: 0;
     pointer-events: none;
-    transform: scale(1,0);
+}
+.audioFile {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    z-index: -1;
+    pointer-events: none;
+}
+.audioStuffs > label {
+    font-size: 3vmin;
+    font-weight: 600;
+    background: navy;
+    border-radius: 50px;
+    color: white;
+    padding: 3vmin;
+    cursor: pointer;
+}
+.audioStuffs > label:hover {
+    background: rgb(1, 1, 82);
 }
 .scene {
+    z-index: 25;
     margin: 10% auto;
     height: 50vmin;
     width: 75vmin;
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
     transform-style: preserve-3d;
 }
 .cuboid {
@@ -56,15 +115,15 @@
     width: var(--width);
     position: absolute;
     transform-style: preserve-3d;
-    transition: all 200ms;
 }
 .fullC {
     pointer-events: none;
 }
 .cuboid__side {
-    background: transparent;
+    background: inherit;
     color: inherit;
     position: absolute;
+    border: inherit;
 }
 .cuboid__side:nth-of-type(1),
 .cuboid__side:nth-of-type(2) {
@@ -119,17 +178,19 @@
     --height: 50vmin;
     --depth: 77vmin;
     transform: translateX(-2vmin) translateZ(-1vmin);
+    background:rgb(102, 171, 192);
 }
 .outerwall > .cuboid__side {
-    background:rgb(102, 171, 192); 
+    background: inherit;
 }
 .outerwall2 {
     --width: 75vmin;
     --depth: 2vmin;
     transform: translateZ(-38.5vmin);
+    background: rgb(90, 151, 170); 
 }
 .outerwall2 > .cuboid__side {
-    background: rgb(90, 151, 170); 
+    background: inherit;
 }
 .outerfloor {
     --width: 77vmin;
@@ -137,9 +198,10 @@
     --depth: 77vmin;
     bottom: -4%;
     transform: translateX(-2vmin) translateZ(-1vmin);
+    background: url('https://cdn.shopify.com/s/files/1/1506/6562/products/10452DarkOak_49d607f0-76b5-41b2-bdc0-7670dcd0594f.jpg?v=1492209684');
 }
 .outerfloor > .cuboid__side {
-    background: url('https://cdn.shopify.com/s/files/1/1506/6562/products/10452DarkOak_49d607f0-76b5-41b2-bdc0-7670dcd0594f.jpg?v=1492209684');
+    background: inherit;
     background-repeat: repeat;
     background-size: 50%;
 }
@@ -149,9 +211,10 @@
     --depth: 25vmin;
     top: 70%;
     transform: translateZ(-25vmin);
+    background: url('https://imgprd19.hobbylobby.com/2/a8/4f/2a84fcb8f4818c4093376eb455dcfdb5f30d6cb9/350Wx350H-1722719-1018.jpg');
 }
 .innerbed > .cuboid__side {
-    background: url('https://imgprd19.hobbylobby.com/2/a8/4f/2a84fcb8f4818c4093376eb455dcfdb5f30d6cb9/350Wx350H-1722719-1018.jpg');
+    background: inherit;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -159,9 +222,10 @@
 .bedBot {
     --height: 3.75vmin;
     top: 85%;
+    background: rgb(255, 220, 238);
 }
 .bedBot > .cuboid__side {
-    background: rgb(255, 220, 238);
+    background: inherit;
     position: absolute;
 }
 /* .bedBot > .cuboid__side:nth-of-type(6) {
@@ -173,9 +237,10 @@
     --depth: 2vmin;
     top: 92.5%;
     transform: translateZ(-15vmin) translateX(5vmin);
+    background: rgb(63, 14, 14);
 }
 .bedLeg > .cuboid__side {
-    background: rgb(63, 14, 14);
+    background: inherit;
     position: absolute;
 }
 .bedLeg2 {
@@ -193,9 +258,10 @@
     --depth: 25vmin;
     top: 60%;
     transform: translateZ(2.5vmin);
+    background: rgb(28, 28, 28);
 }
 .innerdresser > .cuboid__side {
-    background: rgb(28, 28, 28);
+    background: inherit;
     color: inherit;
     position: absolute;
 }
@@ -220,7 +286,7 @@
     background: transparent;
 }
 .innerdesk > .cuboid__side {
-    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background: transparent;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -234,9 +300,10 @@
     --depth: 15vmin;
     --width: 5vmin;
     transform: translateZ(25vmin) rotateY(0);
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
 }
 .innerdeskback > .cuboid__side {
-    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background: inherit;
     background-size: cover;
 }
 .innerdeskback2 {
@@ -244,9 +311,10 @@
     --depth: 5vmin;
     --width: 20vmin;
     transform: translateZ(35vmin) rotateY(0);
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
 }
 .innerdeskback2 > .cuboid__side {
-    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background: inherit;
     background-size: cover;
 }
 .innerinnerdesk {
@@ -254,9 +322,10 @@
     --depth: 15vmin;
     --width: 7.5vmin;
     transform: translateZ(35vmin) rotateY(45deg) translateX(8vmin);
+    background: transparent;
 }
 .innerinnerdesk > .cuboid__side {
-    background: transparent;
+    background: inherit;
 }
 .speaker {
     --height: 5.5vmin;
@@ -265,9 +334,17 @@
     top: 59%;
     transform: translateZ(21.5vmin) rotateY(45deg) translateX(0.5vmin);
     cursor: pointer;
+    transition: transform 300ms;
+    background: rgb(28, 28, 28);
+}
+.speaker:hover {
+    transform: translateZ(21.5vmin) rotateY(45deg) translateX(0.5vmin) translateY(-1vh);
+}
+.speaker:hover > .cuboid__side:nth-of-type(6) {
+    box-shadow: 2px 2px 20px rgb(92, 216, 223);
 }
 .speaker > .cuboid__side {
-    background: rgb(28, 28, 28);
+    background: inherit;
 }
 .speaker > .cuboid__side:nth-of-type(4) {
     background: url('https://cdn11.bigcommerce.com/s-tsw2okvg64/products/14972/images/65984/9026-2__07837.1528301993.500.750.jpg?c=2');
@@ -276,6 +353,10 @@
 }
 .speaker2 {
     transform: translateZ(47.5vmin) rotateY(45deg) translateX(18.75vmin);
+    background: rgb(28, 28, 28);
+}
+.speaker2:hover {
+    transform: translateZ(47.5vmin) rotateY(45deg) translateX(18.75vmin) translateY(-1vh);
 }
 .laptop {
     --width: 10vmin;
@@ -283,9 +364,10 @@
     --depth: 5vmin;
     top: 69%;
     transform: rotateY(-45deg) translateZ(20.5vmin) translateX(22.5vmin);
+    background: rgb(41, 41, 41);
 }
 .laptop > .cuboid__side {
-    background: rgb(41, 41, 41);
+    background: inherit;
 }
 .laptop > .cuboid__side:nth-of-type(5) {
     background: url('https://cdn11.bigcommerce.com/s-blhknq8/product_images/uploaded_images/surface-3-type-cover-keyboard-key-replacement.jpg');
@@ -295,14 +377,25 @@
 .laptopupper {
     position: absolute;
     top: 57%;
-    transform: rotateY(-45deg) rotateX(80deg) translateY(24vmin) translateX(22.5vmin);
+    transform: rotateY(135deg) rotateX(290deg) translateY(23.5vmin) translateX(-22.5vmin) translateZ(-4vmin) scale(1, -1);
+    cursor: pointer;
+    background: rgb(41, 41, 41);
 }
 .laptopupper > .cuboid__side:nth-of-type(5) {
+    background: inherit;
+}
+.laptopupper > .cuboid__side:nth-of-type(6) {
     background: url('https://i.stack.imgur.com/2Sb2P.png');
+    background-size: cover;
+    transition: background-image 200ms;
+}
+.laptopupper:hover > .cuboid__side:nth-of-type(6) {
+    background: rgb(145, 157, 248);
+    background-image: url('https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_505df21738edbe9baababa9d60be291d/github.png');
     background-size: cover;
 }
 .laptopupper > .cuboid__side {
-    background: rgb(41, 41, 41);
+    background: inherit;
 }
 .innerdresser2 {
     --width: 15vmin;
@@ -310,9 +403,10 @@
     --depth: 5vmin;
     top: 70%;
     transform: translateX(30vmin) translateZ(35vmin);
+    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
 }
 .innerdresser2 > .cuboid__side {
-    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
+    background: inherit;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -328,9 +422,10 @@
     --depth: 10vmin;
     top: 80%;
     transform: translateX(70vmin) translateZ(22.5vmin);
+    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
 }
 .lilcabinet > .cuboid__side {
-    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
+    background: inherit;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -357,9 +452,10 @@
     --depth: 25vmin;
     top: 70%;
     transform: translateX(65vmin) translateZ(2.5vmin);
+    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
 }
 .innerdesk2 > .cuboid__side {
-    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
+    background: inherit;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -370,9 +466,10 @@
     --depth: 2vmin;
     top: 75%;
     transform: translateX(65vmin) translateZ(14vmin);
+    background: rgb(63, 14, 14);
 }
 .deskLeg > .cuboid__side {
-    background: rgb(63, 14, 14);
+    background: inherit;
 }
 .deskLeg2 {
     transform: translateX(73vmin) translateZ(14vmin);
@@ -389,9 +486,10 @@
     --depth: 10vmin;
     top: 70%;
     transform: translateX(60vmin)translateZ(-32.5vmin);
+    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
 }
 .innerdresser3 > .cuboid__side {
-    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
+    background: inherit;
     background-size: cover;
     color: inherit;
     position: absolute;
@@ -406,10 +504,11 @@
     --height: 20vmin;
     --depth: 30vmin;
     top: 10%;
-    transform: translateZ(2.5vmin) translateX(-0.5vmin)
+    transform: translateZ(2.5vmin) translateX(-0.5vmin);
+    background: white;
 }
 .window1 > .cuboid__side {
-    background: white;
+    background: inherit;
     color: inherit;
     position: absolute;
 }
@@ -424,9 +523,10 @@
     --depth: 1vmin;
     top: 10%;
     transform: translateZ(-37.5vmin) translateX(45vmin);
+    background: white;
 }
 .window2 > .cuboid__side {
-    background: white;
+    background: inherit;
     color: inherit;
     position: absolute;
 }
