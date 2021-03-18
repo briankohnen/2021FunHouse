@@ -1,0 +1,436 @@
+.threeDWrap {
+    position: absolute;
+    background: rgb(209, 152, 152);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.sliders {
+    position: absolute;
+    right: 0;
+    top: 25%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-evenly;
+    width: 25vw;
+}
+.sliders>div {
+    display: inline;
+    text-align: center;
+}
+.audioStuffs {
+    position: absolute;
+    border-radius: 5px;
+    width: 25vw;
+    height: 25vh;
+    left: 0;
+    top: 25%;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 2vw;
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1,1);
+    transition: all 300ms;
+}
+.hidestuffs {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1,0);
+}
+.scene {
+    margin: 10% auto;
+    height: 50vmin;
+    width: 75vmin;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform-style: preserve-3d;
+}
+.cuboid {
+    --width: 75vmin;
+    --height: 50vmin;
+    --depth: 75vmin;
+    height: var(--height);
+    width: var(--width);
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 200ms;
+}
+.fullC {
+    pointer-events: none;
+}
+.cuboid__side {
+    background: transparent;
+    color: inherit;
+    position: absolute;
+}
+.cuboid__side:nth-of-type(1),
+.cuboid__side:nth-of-type(2) {
+    --coefficient: -0.5;
+    height: var(--height);
+    width: var(--width);
+    transform: translate3d(0, 0, calc(var(--depth) * var(--coefficient)));
+}
+.cuboid__side:nth-of-type(1) {
+    background: rgb(90, 151, 170); 
+}
+.cuboid__side:nth-of-type(2) {
+    --coefficient: 0.5;
+    background: inherit;
+}
+.cuboid__side:nth-of-type(3),
+.cuboid__side:nth-of-type(4) {
+    --rotation: 90deg;
+    height: var(--height);
+    width: var(--depth);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotateY(var(--rotation)) translate3d(0, 0, calc(var(--width) * -0.5));
+}
+.cuboid__side:nth-of-type(3) {
+    background:rgb(116, 194, 218); 
+}
+.cuboid__side:nth-of-type(4) {
+    --rotation: -90deg;
+    background: inherit;
+}
+.cuboid__side:nth-of-type(5),
+.cuboid__side:nth-of-type(6) {
+    --rotation: -90deg;
+    height: var(--depth);
+    width: var(--width);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotateX(var(--rotation)) translate3d(0, 0, calc(var(--height) * -0.5));
+}
+.cuboid__side:nth-of-type(5) {
+    background: inherit;
+}
+.cuboid__side:nth-of-type(6) {
+    --rotation: 90deg;
+    background: url('https://cdn.shopify.com/s/files/1/1506/6562/products/10452DarkOak_49d607f0-76b5-41b2-bdc0-7670dcd0594f.jpg?v=1492209684');
+    background-repeat: repeat;
+    background-size: 50%;
+}
+.outerwall {
+    --width: 2vmin;
+    --height: 50vmin;
+    --depth: 77vmin;
+    transform: translateX(-2vmin) translateZ(-1vmin);
+}
+.outerwall > .cuboid__side {
+    background:rgb(102, 171, 192); 
+}
+.outerwall2 {
+    --width: 75vmin;
+    --depth: 2vmin;
+    transform: translateZ(-38.5vmin);
+}
+.outerwall2 > .cuboid__side {
+    background: rgb(90, 151, 170); 
+}
+.outerfloor {
+    --width: 77vmin;
+    --height: 2vmin;
+    --depth: 77vmin;
+    bottom: -4%;
+    transform: translateX(-2vmin) translateZ(-1vmin);
+}
+.outerfloor > .cuboid__side {
+    background: url('https://cdn.shopify.com/s/files/1/1506/6562/products/10452DarkOak_49d607f0-76b5-41b2-bdc0-7670dcd0594f.jpg?v=1492209684');
+    background-repeat: repeat;
+    background-size: 50%;
+}
+.innerbed {
+    --width: 45vmin;
+    --height: 7.5vmin;
+    --depth: 25vmin;
+    top: 70%;
+    transform: translateZ(-25vmin);
+}
+.innerbed > .cuboid__side {
+    background: url('https://imgprd19.hobbylobby.com/2/a8/4f/2a84fcb8f4818c4093376eb455dcfdb5f30d6cb9/350Wx350H-1722719-1018.jpg');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.bedBot {
+    --height: 3.75vmin;
+    top: 85%;
+}
+.bedBot > .cuboid__side {
+    background: rgb(255, 220, 238);
+    position: absolute;
+}
+/* .bedBot > .cuboid__side:nth-of-type(6) {
+    box-shadow: 10px 10px 50px black;
+} */
+.bedLeg {
+    --height: 3.75vmin;
+    --width: 2vmin;
+    --depth: 2vmin;
+    top: 92.5%;
+    transform: translateZ(-15vmin) translateX(5vmin);
+}
+.bedLeg > .cuboid__side {
+    background: rgb(63, 14, 14);
+    position: absolute;
+}
+.bedLeg2 {
+    transform: translateX(37.5vmin) translateZ(-15vmin); 
+}
+.bedLeg3 {
+    transform: translateX(37.5vmin) translateZ(-35vmin);
+}
+.bedLeg4 {
+    transform: translateX(5vmin) translateZ(-35vmin);
+}
+.innerdresser {
+    --width: 10vmin;
+    --height: 20vmin;
+    --depth: 25vmin;
+    top: 60%;
+    transform: translateZ(2.5vmin);
+}
+.innerdresser > .cuboid__side {
+    background: rgb(28, 28, 28);
+    color: inherit;
+    position: absolute;
+}
+.innerdresser > .cuboid__side:nth-of-type(4) {
+    background: url('https://cdn.decorpad.com/photos/2017/11/28/m_mid-century-6-drawer-wooden-angled-face-brass-pulls-black-dresser.jpeg');
+    background-size: 225%;
+    background-position: 50% 57.5%;
+}
+.innerdesk {
+    --width: 3.75vmin;
+    --height: 15vmin;
+    --depth: 21.5vmin;
+    top: 70%;
+    transform: rotateY(45deg) translateZ(25.25vmin) translateX(-12.25vmin);
+}
+.innerdesktop {
+    top: 70%;
+}
+.innerdesktop > .cuboid__side:nth-of-type(3),
+.innerdesktop > .cuboid__side:nth-of-type(4),
+.innerdesktop > .cuboid__side:nth-of-type(6) {
+    background: transparent;
+}
+.innerdesk > .cuboid__side {
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.innerdesk > .cuboid__side:nth-of-type(5) {
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background-size: cover;
+}
+.innerdeskback {
+    --height: 15vmin;
+    --depth: 15vmin;
+    --width: 5vmin;
+    transform: translateZ(25vmin) rotateY(0);
+}
+.innerdeskback > .cuboid__side {
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background-size: cover;
+}
+.innerdeskback2 {
+    --height: 15vmin;
+    --depth: 5vmin;
+    --width: 20vmin;
+    transform: translateZ(35vmin) rotateY(0);
+}
+.innerdeskback2 > .cuboid__side {
+    background: url('http://textures.world/wp-content/uploads/2018/10/Dark-Wood-Seamless-Background-Texture-6-copy.jpg');
+    background-size: cover;
+}
+.innerinnerdesk {
+    --height: 15vmin;
+    --depth: 15vmin;
+    --width: 7.5vmin;
+    transform: translateZ(35vmin) rotateY(45deg) translateX(8vmin);
+}
+.innerinnerdesk > .cuboid__side {
+    background: transparent;
+}
+.speaker {
+    --height: 5.5vmin;
+    --width: 5.5vmin;
+    --depth: 3vmin;
+    top: 59%;
+    transform: translateZ(21.5vmin) rotateY(45deg) translateX(0.5vmin);
+    cursor: pointer;
+}
+.speaker > .cuboid__side {
+    background: rgb(28, 28, 28);
+}
+.speaker > .cuboid__side:nth-of-type(4) {
+    background: url('https://cdn11.bigcommerce.com/s-tsw2okvg64/products/14972/images/65984/9026-2__07837.1528301993.500.750.jpg?c=2');
+    background-size: 200%;
+    background-position: center;
+}
+.speaker2 {
+    transform: translateZ(47.5vmin) rotateY(45deg) translateX(18.75vmin);
+}
+.laptop {
+    --width: 10vmin;
+    --height: 0.5vmin;
+    --depth: 5vmin;
+    top: 69%;
+    transform: rotateY(-45deg) translateZ(20.5vmin) translateX(22.5vmin);
+}
+.laptop > .cuboid__side {
+    background: rgb(41, 41, 41);
+}
+.laptop > .cuboid__side:nth-of-type(5) {
+    background: url('https://cdn11.bigcommerce.com/s-blhknq8/product_images/uploaded_images/surface-3-type-cover-keyboard-key-replacement.jpg');
+    background-size: 110%;
+    background-position: center;
+}
+.laptopupper {
+    position: absolute;
+    top: 57%;
+    transform: rotateY(-45deg) rotateX(80deg) translateY(24vmin) translateX(22.5vmin);
+}
+.laptopupper > .cuboid__side:nth-of-type(5) {
+    background: url('https://i.stack.imgur.com/2Sb2P.png');
+    background-size: cover;
+}
+.laptopupper > .cuboid__side {
+    background: rgb(41, 41, 41);
+}
+.innerdresser2 {
+    --width: 15vmin;
+    --height: 15vmin;
+    --depth: 5vmin;
+    top: 70%;
+    transform: translateX(30vmin) translateZ(35vmin);
+}
+.innerdresser2 > .cuboid__side {
+    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.innerdresser2 > .cuboid__side:nth-of-type(1) {
+    background: url('https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202047/0069/img51o.jpg');
+    background-size: 250%;
+    background-position: 80% 55%;
+}
+.lilcabinet {
+    --width: 5vmin;
+    --height: 1vmin;
+    --depth: 10vmin;
+    top: 80%;
+    transform: translateX(70vmin) translateZ(22.5vmin);
+}
+.lilcabinet > .cuboid__side {
+    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.lil2 {
+    top: 98%;
+}
+.lil3 {
+    top: 89%;
+}
+.lil4 {
+    --height: 10vmin;
+    --depth: 1vmin;
+    transform: translateZ(27.5vmin) translateX(70vmin);
+}
+.lil5 {
+    --height: 10vmin;
+    --depth: 1vmin;
+    transform: translateZ(17.5vmin) translateX(70vmin);
+}
+.innerdesk2 {
+    --width: 10vmin;
+    --height: 2.5vmin;
+    --depth: 25vmin;
+    top: 70%;
+    transform: translateX(65vmin) translateZ(2.5vmin);
+}
+.innerdesk2 > .cuboid__side {
+    background: url('https://www.rarewoodsusa.com/wp-content/uploads/2018/08/mahogany-brazil-1000x500.jpg');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.deskLeg {
+    --width: 2vmin;
+    --height: 12.5vmin;
+    --depth: 2vmin;
+    top: 75%;
+    transform: translateX(65vmin) translateZ(14vmin);
+}
+.deskLeg > .cuboid__side {
+    background: rgb(63, 14, 14);
+}
+.deskLeg2 {
+    transform: translateX(73vmin) translateZ(14vmin);
+}
+.deskLeg3 {
+    transform: translateX(73vmin) translateZ(-9vmin);
+}
+.deskLeg4 {
+    transform: translateX(65vmin) translateZ(-9vmin);
+}
+.innerdresser3 {
+    --width: 15vmin;
+    --height: 15vmin;
+    --depth: 10vmin;
+    top: 70%;
+    transform: translateX(60vmin)translateZ(-32.5vmin);
+}
+.innerdresser3 > .cuboid__side {
+    background: url('https://images.squarespace-cdn.com/content/v1/58f6cb16e58c62dbecb09bf8/1520207957849-ERHRRXC5JSQT9P3X76IW/ke17ZwdGBToddI8pDm48kMUF2mMknxcivUQmdhWh8ERZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIsT449ugiz-9o0w4c0G4EnNt0X7aJ6cYe0hvdf_KubfUKMshLAGzx4R3EDFOm1kBS/Flooring+Light+Wood+Straight+Tile11-FINAL+with+bleed.jpg?format=1000w');
+    background-size: cover;
+    color: inherit;
+    position: absolute;
+}
+.innerdresser3 > .cuboid__side:nth-of-type(2) {
+    background: url('https://secure.img1-fg.wfcdn.com/im/25451509/resize-h800%5Ecompr-r85/1283/128395855/6+Drawer+Double+Dresser.jpg');
+    background-size: 300%;
+    background-position: 80% 70%;
+}
+.window1 {
+    --width: 1vmin;
+    --height: 20vmin;
+    --depth: 30vmin;
+    top: 10%;
+    transform: translateZ(2.5vmin) translateX(-0.5vmin)
+}
+.window1 > .cuboid__side {
+    background: white;
+    color: inherit;
+    position: absolute;
+}
+.window1 > .cuboid__side:nth-of-type(4) {
+    background: url('https://images-na.ssl-images-amazon.com/images/I/71iy61yHXKL._AC_SX466_.jpg');
+    background-size: cover;
+    background-position: 45% center;
+}
+.window2 {
+    --width: 20vmin;
+    --height: 20vmin;
+    --depth: 1vmin;
+    top: 10%;
+    transform: translateZ(-37.5vmin) translateX(45vmin);
+}
+.window2 > .cuboid__side {
+    background: white;
+    color: inherit;
+    position: absolute;
+}
+.window2 > .cuboid__side:nth-of-type(2) {
+    background: url('https://www.5stardesigns.co.uk/5star/county/swapmeet19/SM19-1112/1.jpg');
+    background-size: cover;
+}
