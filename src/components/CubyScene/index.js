@@ -23,7 +23,7 @@ function CubyScene() {
         let files = e.target.files;
         if (files[0]) {
             let file = URL.createObjectURL(files[0]);
-            setAudio({src: file, open: true});
+            setAudio({src: file, open: false});
         }
     };
 
@@ -351,7 +351,20 @@ function CubyScene() {
                 </div>
 
                 <div className='cuboid outerwall2' style={ wired.bool ? {border: '1px solid rgb(209, 152, 152)', background: 'transparent'} : {}}>
-                    <div className='cuboid__side'></div>
+                    <div className='cuboid__side'>
+                        {wired.bool ?
+                        <></>
+                        :
+                        <>
+                            <p>😨 you found me</p>
+                            <p>try clicking the speakers on that desk over there</p>
+                            <p>or the O button up there ↗</p>
+                            <p>also the laptop links to a cool tutorial</p>
+                            <p>btw in my actual room, i don't have a view of palm trees</p>
+                            <p>or a wonderful prarie</p>
+                        </>
+                        }
+                    </div>
                     <div className='cuboid__side'></div>
                     <div className='cuboid__side'></div>
                     <div className='cuboid__side'></div>
@@ -378,7 +391,7 @@ function CubyScene() {
                     <div className='cuboid__side' style={!wired.bool ? {} : {background: 'transparent'}}></div>
                     <div className='cuboid__side'></div>
                 </div>
-                <div className='cuboid laptop laptopupper' onClick={()=>openInNewTab('https://github.com/briankohnen/2021FunHouse')} style={ wired.bool ? {border: '1px solid rgb(209, 152, 152)', background: 'transparent'} : {}}>
+                <div className='cuboid laptop laptopupper' onClick={()=>openInNewTab('https://css-tricks.com/css-in-3d-learning-to-think-in-cubes-instead-of-boxes/')} style={ wired.bool ? {border: '1px solid rgb(209, 152, 152)', background: 'transparent'} : {}}>
                     <div className='cuboid__side'></div>
                     <div className='cuboid__side'></div>
                     <div className='cuboid__side'></div>

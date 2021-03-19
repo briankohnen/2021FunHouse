@@ -8,6 +8,7 @@
     justify-content: center;
     user-select: none;
     transition: all 500ms;
+    animation: fadein 3s;
 }
 .backText {
     position: absolute;
@@ -21,6 +22,7 @@
     margin: 0;
     color: black;
     font-size: 20vmin;
+    animation: scaleout 5s;
 }
 .backText>h1:nth-of-type(2) {
     top: 30%;
@@ -201,6 +203,9 @@
 }
 .outerwall2 > .cuboid__side {
     background: inherit;
+}
+.outerwall2 > .cuboid__side > p {
+    transform: scale(-1, 1) translateX(5vmin);
 }
 .outerfloor {
     --width: 77vmin;
@@ -397,12 +402,12 @@
 .laptopupper > .cuboid__side:nth-of-type(6) {
     background: url('https://i.stack.imgur.com/2Sb2P.png');
     background-size: cover;
-    transition: background-image 200ms;
+    transition: background-image 200ms, background-size 200ms;
 }
 .laptopupper:hover > .cuboid__side:nth-of-type(6) {
-    background: rgb(145, 157, 248);
-    background-image: url('https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_505df21738edbe9baababa9d60be291d/github.png');
-    background-size: cover;
+    background: yellow;
+    background-image: url('https://avatars.githubusercontent.com/u/2078808?s=200&v=4');
+    background-size: 50%;
 }
 .laptopupper > .cuboid__side {
     background: inherit;
@@ -543,4 +548,20 @@
 .window2 > .cuboid__side:nth-of-type(2) {
     background: url('https://www.5stardesigns.co.uk/5star/county/swapmeet19/SM19-1112/1.jpg');
     background-size: cover;
+}
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes scaleout {
+    0% {
+        transform: scale(0, 1);
+    }
+    100% {
+        transform: scale(1,1);
+    }
 }
