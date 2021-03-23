@@ -118,6 +118,7 @@
     height: 50vmin;
     width: 75vmin;
     transform-style: preserve-3d;
+    cursor: grab;
 }
 .cuboid {
     --width: 75vmin;

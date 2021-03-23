@@ -7,9 +7,9 @@ function CubyScene() {
     const [slideY, setSlideY] = useState({y: -20});
     const [audio, setAudio] = useState({src: '', open: false});
     const [wired, setWired] = useState({bool: false, persp: false});
-    const [mDown, setmDown] = useState({down: false});
-    const [cliX, setcliX] = useState({x: -20});
-    const [cliY, setcliY] = useState({y: -20});
+    const [mDown, setmDown] = useState({down: false, posX: '', posY: ''});
+    const [cliX, setcliX] = useState({x: 0});
+    const [cliY, setcliY] = useState({y: 0});
 
     const handleXSlide = (e) => {
         setSlideX({x: e.target.value});
@@ -52,38 +52,40 @@ function CubyScene() {
         setWired({bool: wired.bool, persp: !wired.persp});
     };
 
-    // const handleMousedown = (e) => {
-    //     setmDown({down: true});
-    //     console.log(e.target.getBoundingClientRect(), e.target.offsetLeft);
-    //     //x: 450 750 1100, 50 300 550 y
-    // };
+    const handleMousedown = (e) => {
+        setmDown({down: true, posX: e.clientX, posY: e.clientY});
+        //x: 450 750 1100, 50 300 550 y
+    };
 
-    // const handleMouseup = (e) => {
-    //     setmDown({down: false});
-    // };
+    const handleMouseup = (e) => {
+        setmDown({down: false});
+    };
 
     // let planeLeft = (441 + 654) / 2;
     // let planeTop = (76.8 + 504) / 2;
 
-    // const handleMousemove = (e) => {
-    //     if (mDown.down) {
-    //         console.log(planeLeft, e.clientX - planeLeft, e.clientY - planeTop);
-    //         setcliX({x: (e.clientX - planeLeft)});
-    //         setcliY({y:  -(e.clientY - planeTop) / 10});
-    //         // planeLeft = e.clientX - planeLeft;
-    //         // planeTop = e.clientY - planeTop;
-    //     }
-    // };
+    let prevPx = mDown.posX;
+    let prevPxY = mDown.posY;
 
-    // useEffect(() => {
-    //     window.addEventListener('mousemove', handleMousemove);
-    //     return (() => window.removeEventListener('mousemove', handleMousemove));
-    // }, []);
+    const handleMousemove = (e) => {
+        if (mDown.down) {
+            // console.log(prevPx, prevPxY, e.clientX, e.clientY);
+            setcliX((e.clientX < prevPx+5 && e.clientX > prevPx-5) ? {x: cliX.x} : e.clientX > prevPx+10 ? {x: cliX.x+=1} : {x: cliX.x-=1});
+            setcliY((e.clientY < prevPxY+5 && e.clientY > prevPxY-5) ? {y: cliY.y} : e.clientY > prevPxY+10 ? {y: cliY.y+=1} : {y: cliY.y-=1});
+            prevPx = e.clientX;
+            prevPxY = e.clientY;
+        };
+    };
+
+    useEffect(() => {
+        window.addEventListener('mousemove', handleMousemove);
+        return (() => window.removeEventListener('mousemove', handleMousemove));
+    }, []);
 
     
 
   return (
-      <section className='threeDWrap' style={wired.bool ? {background:'black'} : {}}>
+      <section className='threeDWrap' onMouseMove={handleMousemove} onMouseDown={handleMousedown} onMouseUp={handleMouseup} style={wired.bool ? {background:'black'} : {}}>
 
             <div className='wiredHolder' onMouseOver={()=>handleWiredHov(true)} onMouseOut={()=>handleWiredHov(false)} onClick={handleWired} style={wired.bool ? 
                 {background: "linear-gradient(to bottom, rgb(209, 152, 152) 50%, yellow 50%) 100%", 
@@ -95,7 +97,7 @@ function CubyScene() {
                 O
             </div>
 
-        <div className='sliders'>
+        {/* <div className='sliders'>
             <div>
                 <input type='range' min='-180' max='180' value={slideX.x} onChange={handleXSlide} step='1' className='slider'></input>
                 <p style={wired.bool ? {color: 'white'} : {}}>rotateX {slideX.x} deg</p>
@@ -105,7 +107,7 @@ function CubyScene() {
                 <input type='range' min='-180' max='180' value={slideY.y} onChange={handleYSlide} step='1' className='slider'></input>
                 <p style={wired.bool ? {color: 'white'} : {}}>rotateY {slideY.y} deg</p>
             </div>
-        </div>
+        </div> */}
 
         <div className={`audioStuffs ${audio.open ? '' : 'hidestuffs'}`}>
             <input id='audioFile' type='file' name='file' accept='audio/*' className='audioFile' onChange={handleAudioInput} />
@@ -120,10 +122,10 @@ function CubyScene() {
             <h1 style={wired.bool ? {color: 'white'} : {}}>OF</h1>
             <h1 style={wired.bool ? {color: 'yellow'} : {}} onClick={setPerspective}>PERSPECTIVE</h1>
         </div>
+{/* 
+        <div className='mouseTrack'></div> */}
 
-        {/* <div className='mouseTrack' onMouseMove={handleMousemove} onMouseDown={handleMousedown} onMouseUp={handleMouseup}></div> */}
-
-        <div className='scene' style={{transform: `rotateX(${slideY.y}deg) rotateY(${slideX.x}deg) scale(1)`}}>
+        <div className='scene' style={{transform: `rotateX(${-cliY.y}deg) rotateY(${cliX.x}deg) scale(1)`}}>
             <div className='cuboid fullC' style={ wired.bool ? {border: '1px solid rgb(209, 152, 152)', background:'transparent'} : {}}>
                 <div className='cuboid__side' style={ wired.bool ? {border: '1px solid rgb(209, 152, 152)', background:'transparent'} : {}}></div>
                 <div className='cuboid__side'></div>
